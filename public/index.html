@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HangMate 🤙 | College Matchmaker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-['Plus_Jakarta_Sans',sans-serif] selection:bg-rose-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Background decorative glow -->
+  <div class="fixed top-[-150px] left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-rose-600/20 via-purple-600/20 to-blue-600/20 blur-[130px] rounded-full pointer-events-none -z-10"></div>
+  <div class="fixed bottom-[-150px] right-[-100px] w-[500px] h-[500px] bg-rose-600/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+
+  <main class="max-w-xl mx-auto px-4 py-8 md:py-12">
+    <!-- Header -->
+    <header class="text-center mb-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-rose-400 text-xs font-semibold uppercase tracking-wider mb-3 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+        College Matchmaker 2026
+      </div>
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-rose-300 bg-clip-text text-transparent">
+        HangMate 🤙
+      </h1>
+      <p class="text-slate-400 mt-2 text-sm md:text-base">
+        Connect with like-minded college mates. Find your new hangout buddy, concert partner, or study pal.
+      </p>
+    </header>
+
+    <!-- CRITICAL PRIVACY BANNER AS REQUESTED -->
+    <div class="mb-6 p-4 rounded-2xl bg-gradient-to-r from-rose-950/40 via-purple-950/40 to-slate-900/80 border border-rose-500/30 backdrop-blur-md shadow-lg shadow-rose-950/20">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-rose-500/20 flex items-center justify-center shrink-0 text-xl text-rose-400">
+          🔒
+        </div>
+        <div>
+          <h2 class="text-xs font-bold uppercase tracking-wider text-rose-300">Privacy Guarantee</h2>
+          <p class="text-sm font-semibold text-rose-100/90 leading-snug">
+            THIS INFO WON'T BE SHARED WITH ANYONE ELSE. FEEL FREE.
+          </p>
+          <p class="text-[11px] text-slate-400 mt-0.5">
+            Only your final matched person will see your Instagram/Email to say hi!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registration Form -->
+    <form id="matchForm" class="space-y-6 bg-slate-900/70 border border-slate-800 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-2xl">
+      
+      <!-- Basic Details -->
+      <div class="space-y-4">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-800 pb-2">
+          Step 1 • Who are you?
+        </h3>
+
+        <!-- Full Name -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-1.5" for="name">
+            Full Name <span class="text-rose-400">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required 
+            placeholder="e.g. Alex Sharma"
+            class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition duration-200"
+          >
+        </div>
+
+        <!-- Email (Personal or Any) -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-1.5" for="email">
+            Email Address <span class="text-rose-400">*</span>
+          </label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            required 
+            placeholder="name@gmail.com (Any email is fine)"
+            class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition duration-200"
+          >
+          <span class="text-[11px] text-slate-400 mt-1 block">
+            This is where your match notification will be delivered.
+          </span>
+        </div>
+
+        <!-- Phone / WhatsApp -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-1.5" for="phone">
+            Phone / WhatsApp Number
+          </label>
+          <input 
+            type="tel" 
+            id="phone" 
+            name="phone" 
+            placeholder="e.g. +91 9876543210 (Optional)"
+            class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition duration-200"
+          >
+        </div>
+
+        <!-- Instagram ID -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-1.5" for="insta">
+            Instagram Handle <span class="text-rose-400">*</span>
+          </label>
+          <div class="relative">
+            <span class="absolute left-4 top-3 text-slate-500 font-semibold">@</span>
+            <input 
+              type="text" 
+              id="insta" 
+              name="insta" 
+              required
+              placeholder="your_insta_handle"
+              class="w-full pl-9 pr-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition duration-200"
+            >
+          </div>
+        </div>
+
+        <!-- Gender Selection -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-1.5">
+            Gender <span class="text-rose-400">*</span>
+          </label>
+          <div class="grid grid-cols-3 gap-2.5">
+            <label class="gender-btn relative flex items-center justify-center p-3 rounded-xl border border-slate-800 bg-slate-950/80 cursor-pointer hover:border-slate-700 transition">
+              <input type="radio" name="gender" value="Male" required class="peer sr-only">
+              <span class="text-sm font-medium text-slate-300 peer-checked:text-rose-400">Male 👨</span>
+              <div class="absolute inset-0 rounded-xl border-2 border-rose-500 pointer-events-none opacity-0 peer-checked:opacity-100 transition"></div>
+            </label>
+            <label class="gender-btn relative flex items-center justify-center p-3 rounded-xl border border-slate-800 bg-slate-950/80 cursor-pointer hover:border-slate-700 transition">
+              <input type="radio" name="gender" value="Female" required class="peer sr-only">
+              <span class="text-sm font-medium text-slate-300 peer-checked:text-rose-400">Female 👩</span>
+              <div class="absolute inset-0 rounded-xl border-2 border-rose-500 pointer-events-none opacity-0 peer-checked:opacity-100 transition"></div>
+            </label>
+            <label class="gender-btn relative flex items-center justify-center p-3 rounded-xl border border-slate-800 bg-slate-950/80 cursor-pointer hover:border-slate-700 transition">
+              <input type="radio" name="gender" value="Other" required class="peer sr-only">
+              <span class="text-sm font-medium text-slate-300 peer-checked:text-rose-400">Other ✨</span>
+              <div class="absolute inset-0 rounded-xl border-2 border-rose-500 pointer-events-none opacity-0 peer-checked:opacity-100 transition"></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Year of Study -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-1.5" for="year">
+            Year of Study <span class="text-rose-400">*</span>
+          </label>
+          <select 
+            id="year" 
+            name="year" 
+            required 
+            class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition duration-200"
+          >
+            <option value="" disabled selected>Select your current year</option>
+            <option value="1st Year">1st Year (Freshers)</option>
+            <option value="2nd Year">2nd Year (Sophomore)</option>
+            <option value="3rd Year">3rd Year (Junior)</option>
+            <option value="4th Year">4th Year (Senior)</option>
+            <option value="Postgraduate / Masters">Postgraduate / Masters</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Vibe & Personality Details -->
+      <div class="space-y-4 pt-4 border-t border-slate-800">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-800 pb-2">
+          Step 2 • The Vibe Check
+        </h3>
+
+        <!-- Music Taste -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-1" for="musicTaste">
+            Music Taste 🎧 <span class="text-rose-400">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="musicTaste" 
+            name="musicTaste" 
+            required
+            placeholder="e.g. The Weeknd, Taylor Swift, Hip-Hop, Punjabi, Rock, Indie..."
+            class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition duration-200"
+          >
+          <!-- Quick Clickable Music Chips -->
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="musicTaste" data-val="Hip-Hop / Rap">Hip-Hop</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="musicTaste" data-val="Pop">Pop</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="musicTaste" data-val="Indie / Alt">Indie</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="musicTaste" data-val="Rock / Metal">Rock</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="musicTaste" data-val="Bollywood / Punjabi">Bollywood</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="musicTaste" data-val="EDM / House">EDM</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="musicTaste" data-val="R&B / Soul">R&B</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="musicTaste" data-val="K-Pop">K-Pop</button>
+          </div>
+        </div>
+
+        <!-- Hobbies -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-1" for="hobbies">
+            Hobbies & Interests 🎨 <span class="text-rose-400">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="hobbies" 
+            name="hobbies" 
+            required
+            placeholder="e.g. Gym, Late-night gaming, Cafes, Photography, Anime, Football..."
+            class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition duration-200"
+          >
+          <!-- Quick Clickable Hobby Chips -->
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="hobbies" data-val="Gaming">Gaming 🎮</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="hobbies" data-val="Gym / Fitness">Gym 💪</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="hobbies" data-val="Binge Watching">Movies / TV 🎬</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="hobbies" data-val="Cafe Hopping">Cafes ☕</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="hobbies" data-val="Photography">Photography 📸</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="hobbies" data-val="Reading">Reading 📚</button>
+            <button type="button" class="tag-chip text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/50" data-target="hobbies" data-val="Coding / Tech">Coding 💻</button>
+          </div>
+        </div>
+
+        <!-- Introvert / Extrovert / Ambivert -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-1.5">
+            Personality Type 🧠 <span class="text-rose-400">*</span>
+          </label>
+          <div class="grid grid-cols-3 gap-2.5">
+            <label class="relative flex flex-col items-center justify-center p-3 rounded-xl border border-slate-800 bg-slate-950/80 cursor-pointer hover:border-slate-700 transition">
+              <input type="radio" name="personality" value="Introvert" required class="peer sr-only">
+              <span class="text-xl mb-1">🧘</span>
+              <span class="text-xs font-semibold text-slate-300 peer-checked:text-rose-400">Introvert</span>
+              <span class="text-[10px] text-slate-500">Chill & quiet</span>
+              <div class="absolute inset-0 rounded-xl border-2 border-rose-500 pointer-events-none opacity-0 peer-checked:opacity-100 transition"></div>
+            </label>
+
+            <label class="relative flex flex-col items-center justify-center p-3 rounded-xl border border-slate-800 bg-slate-950/80 cursor-pointer hover:border-slate-700 transition">
+              <input type="radio" name="personality" value="Ambivert" checked required class="peer sr-only">
+              <span class="text-xl mb-1">🌿</span>
+              <span class="text-xs font-semibold text-slate-300 peer-checked:text-rose-400">Ambivert</span>
+              <span class="text-[10px] text-slate-500">Best of both</span>
+              <div class="absolute inset-0 rounded-xl border-2 border-rose-500 pointer-events-none opacity-0 peer-checked:opacity-100 transition"></div>
+            </label>
+
+            <label class="relative flex flex-col items-center justify-center p-3 rounded-xl border border-slate-800 bg-slate-950/80 cursor-pointer hover:border-slate-700 transition">
+              <input type="radio" name="personality" value="Extrovert" required class="peer sr-only">
+              <span class="text-xl mb-1">⚡</span>
+              <span class="text-xs font-semibold text-slate-300 peer-checked:text-rose-400">Extrovert</span>
+              <span class="text-[10px] text-slate-500">High energy</span>
+              <div class="absolute inset-0 rounded-xl border-2 border-rose-500 pointer-events-none opacity-0 peer-checked:opacity-100 transition"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="pt-4">
+        <button 
+          type="submit" 
+          id="submitBtn"
+          class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-purple-600 hover:from-rose-600 hover:via-pink-600 hover:to-purple-700 text-white font-bold text-base md:text-lg shadow-lg shadow-rose-500/25 transition duration-300 transform active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>Find My HangMate 🤙</span>
+        </button>
+      </div>
+    </form>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-md w-full text-center shadow-2xl relative">
+        <div class="w-16 h-16 rounded-full bg-rose-500/20 text-rose-400 text-3xl flex items-center justify-center mx-auto mb-4 border border-rose-500/30">
+          🎉
+        </div>
+        <h3 class="text-2xl font-extrabold text-white mb-2">You're on the HangMate list!</h3>
+        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+          Your profile has been safely received. The match engine is computing compatibility scores. Your match will be sent straight to your email!
+        </p>
+
+        <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs text-rose-300 mb-6 font-medium">
+          🔒 Remember: Your details stay private and safe!
+        </div>
+
+        <button 
+          id="closeModalBtn" 
+          class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm transition"
+        >
+          Done & Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Clean neutral footer without any admin link -->
+    <footer class="mt-8 text-center text-xs text-slate-600">
+      HangMate © 2026 • Automated College Match Engine
+    </footer>
+  </main>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

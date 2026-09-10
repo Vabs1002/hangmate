@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HangMate Admin • Matchmaking Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-['Plus_Jakarta_Sans',sans-serif] selection:bg-rose-500 selection:text-white pb-20">
+
+  <!-- Admin Login Modal -->
+  <div id="loginModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-xl z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center">
+      <div class="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-2xl flex items-center justify-center mx-auto mb-4">
+        🔑
+      </div>
+      <h2 class="text-2xl font-bold text-white mb-1">HangMate Admin</h2>
+      <p class="text-xs text-slate-400 mb-6">Enter organizer passkey to access matchmaking studio</p>
+      
+      <form id="loginForm" class="space-y-4">
+        <input 
+          type="password" 
+          id="adminPassInput" 
+          placeholder="Admin Password"
+          class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 text-center text-lg tracking-widest focus:outline-none focus:border-rose-500"
+          autofocus
+        >
+        <button 
+          type="submit" 
+          class="w-full py-3 rounded-xl bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-bold text-sm shadow-lg shadow-rose-500/25 transition cursor-pointer"
+        >
+          Unlock Studio
+        </button>
+        <div id="loginError" class="text-xs text-rose-400 hidden font-medium">Incorrect password. Please try again.</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <nav class="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-lg border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">🤙</span>
+      <div>
+        <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+          HangMate <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-400 border border-rose-500/30">Manual Studio</span>
+        </h1>
+        <p class="text-[11px] text-slate-400">Matchmaker Control & Email Dispatcher</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button id="exportCsvBtn" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1.5 transition">
+        📥 Export CSV
+      </button>
+      <a href="/" target="_blank" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1.5 transition">
+        🔗 View Student Form
+      </a>
+      <button id="logoutBtn" class="text-xs px-3 py-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 border border-rose-800/40 transition">
+        Logout
+      </button>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 md:px-8 pt-6">
+
+    <!-- Stats Bar -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
+        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Pool</span>
+        <div id="statTotal" class="text-2xl font-black text-white mt-1">0</div>
+        <span id="statGenderBreakdown" class="text-[10px] text-slate-500">0 M • 0 F • 0 Other</span>
+      </div>
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
+        <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider">Unmatched</span>
+        <div id="statUnmatched" class="text-2xl font-black text-amber-400 mt-1">0</div>
+        <span class="text-[10px] text-slate-500">Ready to pair</span>
+      </div>
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
+        <span class="text-xs font-semibold text-rose-400 uppercase tracking-wider">Matches Made</span>
+        <div id="statMatches" class="text-2xl font-black text-rose-400 mt-1">0</div>
+        <span class="text-[10px] text-slate-500">Active pairs</span>
+      </div>
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
+        <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Emails Sent</span>
+        <div id="statEmails" class="text-2xl font-black text-emerald-400 mt-1">0</div>
+        <span class="text-[10px] text-slate-500">Notified pairs</span>
+      </div>
+      <div class="col-span-2 md:col-span-1 bg-gradient-to-br from-rose-950/40 to-purple-950/40 border border-rose-500/20 rounded-2xl p-4 flex flex-col justify-center">
+        <button id="dispatchAllBtn" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white font-bold text-xs shadow-lg shadow-rose-500/20 transition flex items-center justify-center gap-1.5 cursor-pointer">
+          <span>🚀 Send All Pending Emails</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN INTERACTIVE MANUAL PAIRING WORKBENCH -->
+    <section class="mb-10 bg-slate-900/90 border border-rose-500/30 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
+            Manual Matchmaker Workbench
+          </span>
+          <h2 class="text-2xl font-extrabold text-white mt-1">Pair Up Two Students</h2>
+          <p class="text-xs text-slate-400">Click any participant from the pool below to load them into Slot A and Slot B, then click Pair!</p>
+        </div>
+        <button id="clearWorkbenchBtn" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 border border-slate-700 transition">
+          Clear Slots
+        </button>
+      </div>
+
+      <!-- Workbench Slots -->
+      <div class="grid grid-cols-1 md:grid-cols-11 gap-4 items-center">
+        
+        <!-- Slot A (Student 1) -->
+        <div id="slotA" class="md:col-span-5 border-2 border-dashed border-slate-700 hover:border-rose-500/60 rounded-2xl p-5 bg-slate-950/60 min-h-[190px] flex flex-col justify-center transition">
+          <div class="slot-empty text-center py-6 text-slate-500">
+            <span class="text-3xl block mb-2">👤</span>
+            <p class="text-sm font-semibold text-slate-400">Slot A: Select 1st Person</p>
+            <p class="text-xs text-slate-600 mt-1">Click a student card from the pool below</p>
+          </div>
+          <div class="slot-content hidden"></div>
+        </div>
+
+        <!-- Connection Indicator / Pair Button -->
+        <div class="md:col-span-1 flex flex-col items-center justify-center gap-2">
+          <div class="w-10 h-10 rounded-full bg-rose-500/20 border border-rose-500/30 text-rose-400 flex items-center justify-center text-xl font-bold shadow-inner">
+            ⚡
+          </div>
+        </div>
+
+        <!-- Slot B (Student 2) -->
+        <div id="slotB" class="md:col-span-5 border-2 border-dashed border-slate-700 hover:border-rose-500/60 rounded-2xl p-5 bg-slate-950/60 min-h-[190px] flex flex-col justify-center transition">
+          <div class="slot-empty text-center py-6 text-slate-500">
+            <span class="text-3xl block mb-2">👤</span>
+            <p class="text-sm font-semibold text-slate-400">Slot B: Select 2nd Person</p>
+            <p class="text-xs text-slate-600 mt-1">Click another student card from the pool below</p>
+          </div>
+          <div class="slot-content hidden"></div>
+        </div>
+      </div>
+
+      <!-- Live Vibe Comparison Banner (when both slots filled) -->
+      <div id="vibeComparison" class="mt-4 p-4 rounded-xl bg-slate-950 border border-slate-800 hidden">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
+              <span>🔥 Vibe Compatibility Preview</span>
+            </div>
+            <p id="vibeSummary" class="text-xs text-slate-300"></p>
+          </div>
+          <button 
+            id="createPairBtn"
+            class="py-3 px-8 rounded-xl bg-gradient-to-r from-rose-500 via-pink-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white font-bold text-sm shadow-xl shadow-rose-500/25 transition cursor-pointer flex items-center justify-center gap-2 shrink-0"
+          >
+            <span>Confirm & Create Match 💖</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABS: Available Pool vs Confirmed Matches -->
+    <div class="flex items-center justify-between border-b border-slate-800 mb-6">
+      <div class="flex gap-4">
+        <button id="tabPoolBtn" class="tab-btn pb-3 px-1 text-sm font-bold text-rose-400 border-b-2 border-rose-500 flex items-center gap-2">
+          <span>Student Pool</span>
+          <span id="poolBadge" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">0</span>
+        </button>
+        <button id="tabMatchesBtn" class="tab-btn pb-3 px-1 text-sm font-bold text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2">
+          <span>Active Matches</span>
+          <span id="matchesBadge" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">0</span>
+        </button>
+      </div>
+
+      <!-- Quick filters for Student Pool -->
+      <div id="poolFilters" class="hidden md:flex items-center gap-2 text-xs">
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="🔍 Search name, music, hobbies..." 
+          class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-rose-500 w-52"
+        >
+        <select id="genderFilter" class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-white text-xs">
+          <option value="ALL">All Genders</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <select id="yearFilter" class="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-white text-xs">
+          <option value="ALL">All Years</option>
+          <option value="1st Year">1st Year</option>
+          <option value="2nd Year">2nd Year</option>
+          <option value="3rd Year">3rd Year</option>
+          <option value="4th Year">4th Year</option>
+          <option value="Postgraduate / Masters">PG</option>
+        </select>
+        <label class="flex items-center gap-1.5 text-slate-300 cursor-pointer ml-1">
+          <input type="checkbox" id="unmatchedOnlyCheck" checked class="rounded bg-slate-900 border-slate-800 text-rose-500 focus:ring-0">
+          <span>Unmatched only</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- TAB 1: Student Pool Grid -->
+    <div id="poolView" class="space-y-4">
+      <div id="poolContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Student cards injected via JS -->
+      </div>
+      <div id="poolEmpty" class="text-center py-16 text-slate-500 hidden">
+        <span class="text-4xl block mb-2">🔍</span>
+        <p class="text-sm font-semibold">No students found matching current filters.</p>
+      </div>
+    </div>
+
+    <!-- TAB 2: Confirmed Matches Grid -->
+    <div id="matchesView" class="space-y-4 hidden">
+      <div id="matchesContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- Match cards injected via JS -->
+      </div>
+      <div id="matchesEmpty" class="text-center py-16 text-slate-500 hidden">
+        <span class="text-4xl block mb-2">✨</span>
+        <p class="text-sm font-semibold">No matches made yet.</p>
+        <p class="text-xs text-slate-600 mt-1">Use the Manual Matchmaker Workbench above to pair students!</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Email Preview Modal -->
+  <div id="emailPreviewModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+        <div>
+          <h3 class="text-base font-bold text-white">Email Notification Preview</h3>
+          <p id="previewRecipient" class="text-xs text-slate-400"></p>
+        </div>
+        <button id="closePreviewBtn" class="text-slate-400 hover:text-white text-lg">✕</button>
+      </div>
+      <div class="p-6 overflow-y-auto flex-1">
+        <div id="emailIframeContainer" class="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 p-2"></div>
+      </div>
+      <div class="px-6 py-3 border-t border-slate-800 bg-slate-950 flex justify-end">
+        <button id="closePreviewBtn2" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white">
+          Close Preview
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
